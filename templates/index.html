@@ -13,13 +13,17 @@
     <table>
         <tr>
             <th>Tarea</th>
-            <th>Agregada</th>
+            <th>Detalles</th>
+            <th>Fecha</th>
+            <th>Prioridad</th>
             <th>Acciones</th>
         </tr>
         {% for task in tasks %}
             <tr>
-                <td>{{ task.content }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.details }}</td>
                 <td>{{ task.date_created.date() }}</td>
+                <td>{{ task.priority }}</td>
                 <td>
                     <a href="/delete/{{task.id}}">Eliminar</a>
                     <br>
@@ -32,8 +36,17 @@
 
     <div class="form">
         <form action="/todo" method="POST">
-            <input type="text" name="content" id="content">
-            <input type="submit" value="Agregar tarea">
+            Tarea:
+            <input type="text" name="title" id="content" required>
+            <br>Detalle:
+            <input type="text" name="details" id="content">
+            <br>Prioridad   
+            1<input type="radio" name="priority" value="1" checked>
+            <input type="radio" name="priority" value="2">
+            <input type="radio" name="priority" value="3">
+            <input type="radio" name="priority" value="4">
+            <input type="radio" name="priority" value="5">5
+            <br><input type="submit" value="Agregar tarea">
         </form>
     </div>
 </div>
