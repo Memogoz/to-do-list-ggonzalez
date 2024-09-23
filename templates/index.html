@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">To do list</h1>
+<div class="container">
+    <h1 style="text-align: center" class="title">To do list</h1>
     {% if tasks|length < 1 %}
-    <h4 style="text-align: center">No hay tareas. Crea una abajo!</h4>
+    <br><h4 style="text-align: center" class="subtitle">No hay tareas. Crea una !</h4><br>
     {% else %}
-    <table>
+    <table class="table is-fullwidth table is-hoverable">
         <tr>
             <th>Tarea</th>
             <th>Detalles</th>
@@ -34,19 +34,19 @@
     </table>
     {% endif %}
 
-    <div class="form">
+    <div class="field">
         <form action="/todo" method="POST">
-            Tarea:
-            <input type="text" name="title" id="content" required>
-            <br>Detalle:
-            <input type="text" name="details" id="content">
-            <br>Prioridad   
-            1<input type="radio" name="priority" value="1" checked>
+            <label class="label">Tarea:</label>
+            <input class="input is-small" type="text" name="title" id="content" required>
+            <label class="label">Detalle:</label>
+            <input class="input is-small" type="text" name="details" id="content">
+            <label class="label">Prioridad:</label>   
+            &emsp; 1<input type="radio" name="priority" value="1" checked>
             <input type="radio" name="priority" value="2">
             <input type="radio" name="priority" value="3">
             <input type="radio" name="priority" value="4">
             <input type="radio" name="priority" value="5">5
-            <br><input type="submit" value="Agregar tarea">
+            <br><br><input class="button is-link" type="submit" value="Agregar tarea">
         </form>
     </div>
 </div>

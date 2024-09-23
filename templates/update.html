@@ -5,22 +5,22 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Editar tarea</h1>
+<div class="container">
+    <h1 style="text-align: center" class="title">Editar tarea</h1>
 
-    <div class="form">
+    <div class="field">
         <form action="/update/{{task.id}}" method="POST">
-            Tarea:
-            <input type="text" name="title" id="content" value="{{task.title}}">
-            <br>Detalle:
-            <input type="text" name="details" id="content" value="{{task.details}}">
-            <br>Prioridad   
-            1<input type="radio" name="priority" value="1" {{ "checked" if task.priority == 1 else "" }}>
+            <label class="label">Tarea:</label>
+            <input class="input" type="text" name="title" id="content" value="{{task.title}}">
+            <label class="label">Detalle:</label>
+            <input class="input" type="text" name="details" id="content" value="{{task.details}}">
+            <label class="label">Prioridad:</label>   
+            &emsp; 1<input type="radio" name="priority" value="1" {{ "checked" if task.priority == 1 else "" }}>
             <input type="radio" name="priority" value="2" {{ "checked" if task.priority == 2 else "" }}>
             <input type="radio" name="priority" value="3" {{ "checked" if task.priority == 3 else "" }}>
             <input type="radio" name="priority" value="4" {{ "checked" if task.priority == 4 else "" }}>
             <input type="radio" name="priority" value="5" {{ "checked" if task.priority == 5 else "" }}>5
-            <input type="submit" value="Guardar">
+            <br><br><input class="button is-link" type="submit" value="Guardar">  
         </form>
     </div>
 </div>

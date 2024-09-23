@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Iniciar Sesión</h1>
+<div class="container">
+    <h1 style="text-align: center" class="title">Iniciar Sesión</h1>
 
-    <div class="form">
+    <div class="field">
         <form action="/login" method="POST">
-            Nombre de usuario
-            <br><input type="text" name="user" id="content" required>
-            <br>Contrasenia
-            <br><input type="password" name="password" id="content" required>
-            <br><br><input type="submit" value="Iniciar Sesión">    <a href="/signIn">Crear cuenta</a>
+            <label class="label">Nombre de usuario</label>
+            <input class="input" type="text" name="user" id="content" required>
+            <label class="label">Contraseña</label>
+            <input class="input" type="password" name="password" id="content" required>
+            <br><br><input class="button is-link" type="submit" value="Iniciar Sesión">    <a class="button is-link is-light" href="/signIn">Crear cuenta</a>
         </form>
     </div>
 </div>

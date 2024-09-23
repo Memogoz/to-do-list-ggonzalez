@@ -1,6 +1,12 @@
 # To do list - ggonzalez
 
 ## Cómo correr la app
+
+0. Cambiar el nombre del archivo `.example-env` a `.env` e ingresar variables propias
+```
+$ mv .example-env .env
+```
+
 1. Instalar `virtualenv`:
 ```
 $ pip install virtualenv
@@ -26,5 +32,5 @@ $ (env) pip install -r requirements.txt
 $ (env) python app.py
 ```
 
-La app se encontrará en http://127.0.0.1:5000/
+La app se encontrará en `http://127.0.0.1:5000/`
 

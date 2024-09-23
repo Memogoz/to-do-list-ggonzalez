@@ -5,18 +5,18 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Crear una cuenta</h1>
+<div class="container">
+    <h1 style="text-align: center" class="title">Crear una cuenta</h1>
 
-    <div class="form">
+    <div class="field">
         <form action="/createAccount" method="POST">
-            Nombre de usuario
-            <br><input type="text" name="user" id="content" required>
-            <br>Correo electrónico
-            <br><input type="email" name="email" id="content" required>
-            <br>Contrasenia
-            <br><input type="password" name="password" id="content" required>
-            <br><br><input type="submit" value="Crear cuenta">
+            <label class="label">Nombre de usuario</label>
+            <input class="input" type="text" name="user" id="content" required>
+            <label class="label">Correo electrónico</label>
+            <input class="input" type="email" name="email" id="content" required>
+            <label class="label">Contraseña</label>
+            <input class="input" type="password" name="password" id="content" required>
+            <br><br><input class="button is-link" type="submit" value="Crear cuenta">
         </form>
     </div>
 </div>
