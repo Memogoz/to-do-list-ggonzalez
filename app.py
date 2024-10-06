@@ -93,13 +93,13 @@ def index():
         try:
             db.session.add(new_task)
             db.session.commit()
-            return redirect('/todo')
+            return redirect('/todo', 302)
         except:
             return 'There was an issue adding your task'
 
     else:
         tasks = Task.query.order_by(Task.date_created).all()
-        return render_template('index.html', tasks=tasks)
+        return render_template('index.html', tasks=tasks), 302
     
 
 
