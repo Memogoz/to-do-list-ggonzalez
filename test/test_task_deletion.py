@@ -14,7 +14,7 @@ def client():
 
 
 def test_autorization():
-    pass
+    pass #Not implemeted
 
 def test_task_removed_from_database(client):
     client.post(url_for('app.todo'), data={'title':'Example title','details':'Example details','priority':'3','user_id':'100'})

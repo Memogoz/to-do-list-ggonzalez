@@ -54,7 +54,7 @@ def check_login():
         elif (username == 'admin' and password == 'admin'):
             return redirect('/todo')
         else:
-            return redirect('/')
+            return redirect('/'), 401
     else:
         return redirect('/')
 
