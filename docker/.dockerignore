@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+.pytest_cache
+
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Flask
+instance/
+.webassess-cache
+
+# SQLite database
+*.db
+
+# IDE specific files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+#SonarQ files
+sonarQ/

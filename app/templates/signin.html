@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>To do list</title>
+{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-no-repeat bg-cover bg-center"
+	style="background-image: url('https://images.unsplash.com/photo-1486520299386-6d106b22014b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80')">
+	<div class="flex justify-center">
+		<div class="bg-white min-h-96 w-1/4 m-12 flex justify-center items-center">
+			<div>
+
+				<form action="/createAccount" method="POST">
+					<div>
+						<br><h1 class="text-2xl font-bold">Create an account</h1>
+					</div>
+					<div class="mt-5">
+						<label class="block text-md mb-2" for="password">Username</label>
+                        <input class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="text" name="user" placeholder="username" required>
+                    </div>
+                    <div class="my-3">
+                        <label class="block text-md mb-2" for="email">Email</label>
+                        <input class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="email" name="email" placeholder="email" required>
+                    </div>
+                    <div class="my-3">
+                        <label class="block text-md mb-2" for="email">Password</label>
+                        <input class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password" name="password" placeholder="password" required>
+                    </div>
+                    <div class="my-3">
+                        <label class="block text-md mb-2" for="email">Confirm password</label>
+                        <input class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password" name="conf_password" placeholder="password" required>
+                    </div>
+				
+                    <div class="">
+                        <input class="mt-4 mb-3 w-full bg-green-500 hover:bg-green-400 text-white py-2 rounded-md transition duration-100" type="submit" value="Create account">
+                        </div><br>
+                    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

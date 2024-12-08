@@ -1,7 +1,10 @@
 import pytest
 from flask import url_for, request
-from app import User, Task, app, db
+import sys
+import os
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from app import User, Task, app, db
 
 def client():
     app = create_app('testing')

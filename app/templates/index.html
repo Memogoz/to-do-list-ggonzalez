@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>To do list</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="min-h-screen bg-no-repeat bg-cover bg-center"
+style="background-image: url('https://images.unsplash.com/photo-1486520299386-6d106b22014b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80')">
+<div class="flex justify-center">
+<div class="bg-white/85 min-h-screen w-3/5">
+
+    <div class="max-h-[20vh]">
+        <form action="/todo" method="POST">
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5">
+            <div class="p-8 flex items-center">
+                    <input class="pr-4 text-2xl bg-blue-400 rounded-lg text-center cursor-pointer text-white font-bold py-8" type="submit" value=" + Add task">
+                <div class="ml-4">
+                    <label class="uppercase tracking-wide text-md text-indigo-500 font-semibold">Title:</label>
+                    <input class="my-1 w-auto px-3 py-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" type="text" name="title" required>
+    
+                    <br><label class="uppercase tracking-wide text-md text-indigo-500 font-semibold">Details:</label>
+                    <input class="my-1 w-auto px-3 py-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" type="text" name="details" id="content">
+    
+                    <br><label class="uppercase tracking-wide text-md text-indigo-500 font-semibold">Priority:</label>   
+                    &emsp; <span class="uppercase tracking-wide text-2xl text-indigo-500 font-semibold">- </span>
+                    <input class="mt-2" type="radio" name="priority" value="1" checked>
+                    <input class="mt-2" type="radio" name="priority" value="2">
+                    <input class="mt-2" type="radio" name="priority" value="3">
+                    <input class="mt-2" type="radio" name="priority" value="4">
+                    <input class="mt-2" type="radio" name="priority" value="5">
+                    <span class="uppercase tracking-wide text-2xl text-indigo-500 font-semibold"> +</span>
+                    
+    
+                </div>
+            </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="overflow-y-auto max-h-[77vh]">
+    {% if tasks|length < 1 %}
+        <br><h4 style="text-align: center" class="subtitle">No hay tareas. Crea una !</h4><br>
+    {% else %}
+
+    {% for task in tasks %}
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5">
+        <div class="md:flex">
+            <div class="p-8">
+            <div class="uppercase tracking-wide text-lg text-indigo-500 font-semibold">{{ task.title }}</div>
+            <p class="block mt-1 text-md leading-tight font-medium text-gray-500">{{ task.details }}</p>
+            <p class="mt-2 text-gray-500">{{ task.date_created.date() }}</p>
+            <div class="py-2 -ml-5">
+                {% for importance in range(task.priority) %}
+                <span class="inline-block h-10 w-10 ml-5 rounded-full ring-2 ring-white bg-indigo-{{100*(importance+1)}}" >
+                {% endfor %}
+                
+            </div>
+            <button class="mt-5 px-4 py-2 text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 modal-open" 
+                    data-modal="modal-{{ task.id }}">
+                    Modify
+            </button>
+
+            <a class="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            href="/delete/{{task.id}}">
+                Delete
+            </a>
+            </div>
+        </div>
+        </div>
+
+        <div id="modal-{{ task.id }}" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white rounded-lg shadow-lg w-1/3">
+                <div class="p-4 border-b">
+                    <h2 class="text-lg font-semibold text-gray-800">Modify Task</h2>
+                </div>
+                <div class="p-4">
+                    <form action="/update/{{ task.id }}" method="POST">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                        <input type="text" name="title" value="{{ task.title }}" class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4">
+                        
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Details:</label>
+                        <input type="text" name="details" value="{{ task.details }}" class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4">
+                        
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Priority:</label>
+                        &emsp; <span class="uppercase tracking-wide text-2xl text-indigo-500 font-semibold">- </span>
+                        <input class="mt-2" type="radio" name="priority" value="1" checked>
+                        <input class="mt-2" type="radio" name="priority" value="2">
+                        <input class="mt-2" type="radio" name="priority" value="3">
+                        <input class="mt-2" type="radio" name="priority" value="4">
+                        <input class="mt-2" type="radio" name="priority" value="5">
+                        <span class="uppercase tracking-wide text-2xl text-indigo-500 font-semibold"> +</span>
+    
+                        
+                        <div class="mt-4 flex justify-end">
+                            <button type="button" class="modal-close px-4 py-2 bg-gray-400 text-white rounded-md">Cancel</button>
+                            <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    </div>
+
+
+    {% endif %}
+
+
+    
+
+</div></div></div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modalOpenButtons = document.querySelectorAll('.modal-open');
+        const modalCloseButtons = document.querySelectorAll('.modal-close');
+
+        modalOpenButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modalId = button.getAttribute('data-modal');
+                document.getElementById(modalId).classList.remove('hidden');
+            });
+        });
+
+        modalCloseButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.closest('.fixed').classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('fixed')) {
+                e.target.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
+
+{% endblock %}
+
