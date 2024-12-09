@@ -44,7 +44,7 @@ jobs:
 
     # 6. Construir la imagen Docker
     - name: Build Docker Image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/to-do-list-ggonzalez:latest .
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/to-do-list-ggonzalez:latest -f docker/Dockerfile .
 
     # 7. Subir la imagen a Docker Hub
     - name: Push Docker Image to Docker Hub
