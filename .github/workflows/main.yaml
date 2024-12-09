@@ -43,11 +43,11 @@ jobs:
 
     # 6. Construir la imagen Docker
     - name: Build Docker Image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest .
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/to-do-list-ggonzalez:latest .
 
     # 7. Subir la imagen a Docker Hub
     - name: Push Docker Image to Docker Hub
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/to-do-list-ggonzalez:latest
 
   notify-render:
     name: Notify Render for Deployment
@@ -60,8 +60,4 @@ jobs:
       env:
         RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
       run: |
-        curl -X POST \
-          -H "Authorization: Bearer $RENDER_API_TOKEN" \
-          -H "Content-Type: application/json" \
-          -d '{"serviceId": "${{ secrets.RENDER_SERVICE_ID }}", "clearCache": true}' \
-          https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
+        curl --request POST --url https://api.render.com/v1/services/{{ secrets.RENDER_SERVICE_ID }}/deploys --header 'accept: application/json' --header 'authorization: Bearer $RENDER_API_TOKEN' --header 'content-type: application/json'
