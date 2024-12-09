@@ -18,14 +18,6 @@ def client():
             db.drop_all()
 
 
-@pytest.fixture(autouse=True)
-def setup_db(app):
-    with app.app_context():
-        db.create_all()
-    yield
-    with app.app_context():
-        db.session.remove()
-        db.drop_all()
 
 
 def test_create_task_valid_input(client):
