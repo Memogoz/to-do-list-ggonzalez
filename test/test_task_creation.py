@@ -2,15 +2,20 @@ import pytest
 from flask import url_for, request
 import sys
 import os
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from app import User, Task, db, create_app
+from app import User, Task, create_app, db
+
 
 
 @pytest.fixture
-def app():
+def client():
     app = create_app()
-    return app
+    with app.test_client() as client:
+        with app.app_context():
+            db.create_all()
+            yield client
+            db.session.remove()
+            db.drop_all()
 
 
 @pytest.fixture(autouse=True)
