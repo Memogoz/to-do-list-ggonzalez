@@ -6,6 +6,8 @@ WORKDIR /app
 
 # Copia el archivo de requisitos y la aplicación al contenedor
 COPY requirements.txt requirements.txt
+COPY run.py run.py
+COPY app app
 COPY . .
 
 # Instala las dependencias
