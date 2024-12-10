@@ -29,7 +29,7 @@ $ (env) pip install -r requirements.txt
 
 5. Finalmente, iniciar el servidor web:
 ```
-$ (env) python app.py
+$ (env) python run.py
 ```
 
 La app se encontrará en `http://127.0.0.1:5000/`

@@ -62,3 +62,7 @@ jobs:
         RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
       run: |
         curl --request POST --url https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys --header 'accept: application/json' --header 'authorization: Bearer $RENDER_API_TOKEN' --header 'content-type: application/json'
+
+
+#safety check -r requirements.txt
+#bandit -r /path/to/your/project

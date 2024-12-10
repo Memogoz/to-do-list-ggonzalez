@@ -1,4 +1,6 @@
-from flask import Flask
+from flask import Flask, session
+from flask_session import Session
+from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
@@ -7,6 +9,11 @@ db = SQLAlchemy()  # Declarar aquí para evitar ciclos
 
 def create_app():
     app = Flask(__name__)
+
+    app.config['SECRET_KEY'] = 'your_secret_key'
+    app.config['SESSION_TYPE'] = 'filesystem'  # Almacenar sesiones en archivos locales
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)  # Duración de la sesión
+    Session(app)
 
     load_dotenv()  
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myDatabase.db'
@@ -21,4 +28,4 @@ def create_app():
 
     return app
 
-from app.models import User, Task
+from .models.models import Task, User

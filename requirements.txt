@@ -10,3 +10,7 @@ Werkzeug==1.0.1
 python-dotenv
 Flask_login
 Pytest
+flask-session
+selenium
+safety
+bandit

@@ -29,3 +29,6 @@ Thumbs.db
 
 # Temporary files
 *.tmp
+
+# Session files
+flask_session
