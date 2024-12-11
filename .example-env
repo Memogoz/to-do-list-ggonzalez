@@ -1,1 +1,4 @@
-DATABASE_URL=sqlite:///example.db
+DATABASE_URL = 'sqlite:///example.db'
+GOOGLE_OAUTH_CLIENT_ID = 'X'
+GOOGLE_OAUTH_CLIENT_SECRET = 'X'
+GOOGLE_OAUTH_REDIRECT_URI = 'X'

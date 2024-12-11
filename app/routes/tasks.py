@@ -5,9 +5,12 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from ..models.models import Task, User
-from .services import login_required
+from .services import login_required, getTimezones
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+from flask_dance.contrib.google import google
+
+
 
 tasks = Blueprint('tasks', __name__)
 
@@ -26,7 +29,14 @@ def check_login():
         password = request.form['password']
         
         from app import db
-        user = User.query.filter_by(username=username, password=password).first()
+        user_pass = User.query.filter_by(username=username, password=password).first()
+        email_pass = User.query.filter_by(email=username, password=password).first()
+    	
+        user = False 
+        if user_pass:
+            user = user_pass
+        elif email_pass:
+            user = email_pass
 
         if user:
             session['user_id'] = user.id  # Guardar ID del usuario en la sesión
@@ -45,6 +55,18 @@ def check_login():
     else:
         return redirect('/')
 
+@tasks.route('/google/authorized')
+def google_login():
+    if not google.authorized:
+        return redirect(url_for('google.login'))
+    user_info = google.get('/plus/v1/people/me')
+    assert user_info.ok, user_info.text
+    user_info_json = user_info.json()
+    session['user_id'] = user_info_json['id']
+    session['username'] = user_info_json['displayName']
+    session['logged_in'] = True
+    flash(f'Welcome back, {user_info_json["displayName"]}', 'success')
+    return redirect('/todo')
 
 @tasks.route('/logout')
 def logout():
@@ -80,6 +102,7 @@ def createAccount():
 @tasks.route('/todo', methods=['POST', 'GET'])
 @login_required
 def index():
+
     if not session.get('logged_in'):  # Verificar si el usuario está logueado
         flash('Please log in to access your tasks.', 'warning')
         return redirect('/')
@@ -99,7 +122,8 @@ def index():
             return 'There was an issue adding your task'
     else:
         tasks = Task.query.filter_by(user_id=session['user_id']).order_by(Task.date_created).all()
-        return render_template('index.html', tasks=tasks)
+        timezones = getTimezones()
+        return render_template('index.html', tasks=tasks, timezones=timezones)
 
     
 

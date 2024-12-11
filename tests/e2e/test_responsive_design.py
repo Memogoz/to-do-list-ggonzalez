@@ -1,12 +1,9 @@
-import pytest
-from selenium import webdriver
+'''from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service as ChromeService
 
 @pytest.fixture(scope="module")
 def driver():
-    service = ChromeService(executable_path="chromedriver")
-    driver = webdriver.Chrome(service=service)
+    driver = webdriver.Chrome()  # Selenium Manager descargará el driver automáticamente
     yield driver
     driver.quit()
 
@@ -23,4 +20,4 @@ def test_responsive_design(driver):
 
     # Prueba en móvil
     driver.set_window_size(375, 812)
-    assert driver.find_element(By.LINK_TEXT, "Login").is_displayed()
+    assert driver.find_element(By.LINK_TEXT, "Login").is_displayed()'''

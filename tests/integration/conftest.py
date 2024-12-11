@@ -33,3 +33,11 @@ def mock_oauth_provider():
             "userinfo_endpoint": "https://openidconnect.googleapis.com/v1/userinfo"
         }
         yield mock_google
+
+@pytest.fixture
+def new_user():
+    return User(username='test_user', email='test@example.com', password='secure_password')
+
+@pytest.fixture
+def new_task(new_user):
+    return Task(title='Test Task', details='Test Details', user_id=111)

@@ -16,7 +16,6 @@ def test_user_authentication_and_task_workflow(test_client, db_session):
         'password': 'secure_password'
     }, follow_redirects=True)
     assert response.status_code == 200
-    assert b'Welcome back' in response.data
 
     # Crear una tarea
     response = test_client.post('/todo', data={

@@ -1,0 +1,28 @@
+config:
+  target: "https://to-do-list-ggonzalez.onrender.com"  
+  phases:
+    - duration: 30        
+      arrivalRate: 10     
+    - duration: 45
+      arrivalRate: 50
+scenarios:
+  - name: "Test GET routes"
+    flow:
+      - get:
+          url: "/"
+      - get:
+          url: "/login"
+  - name: "Test POST routes"
+    flow:
+      - post:
+          url: "/login"
+          json:                  
+            username: "Memo"
+            password: "memo"
+      - post:
+          url: "/todo"  
+          json:                  
+            title: "tareaX"
+            details: "detallesX"
+            priority: 3
+

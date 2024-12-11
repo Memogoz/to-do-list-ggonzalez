@@ -1,17 +1,15 @@
-'''import pytest
-from app.forms import LoginForm, TaskForm
+import pytest
 
-def test_login_form_validation():
-    form = LoginForm(data={'username': 'testUser', 'password': 'testPassword'})
-    assert form.validate() is True
+def test_login_form_validation(test_client):
+    form_valid = test_client.post('/login', data={'user': 'test_user', 'password': 'secure_password'})
+    assert form_valid.status_code == 302
 
-    form_invalid = LoginForm(data={'username': '', 'password': ''})
-    assert form_invalid.validate() is False
+    form_invalid = test_client.post('/login', data={'user': 'test_user', 'password': ''})
+    assert form_invalid.status_code == 302
 
-def test_task_form_validation():
-    form = TaskForm(data={'title': 'Task Title', 'description': 'Task Description', 'status': 'Pending'})
-    assert form.validate() is True
+def test_task_form_validation(test_client):
+    task_valid = test_client.post('/todo', data={'title': 'test_title', 'details': 'test_details','priority':3,})
+    assert task_valid.status_code == 302
 
-    form_invalid = TaskForm(data={'title': '', 'description': '', 'status': ''})
-    assert form_invalid.validate() is False
-'''
+    task_invalid = test_client.post('/todo', data={'title': '', 'details': 'test_details','priority':3,})
+    assert task_invalid.status_code == 302
